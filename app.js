@@ -290,6 +290,9 @@
   function renderCard(item, matches) {
     const isFav = state.favorites.has(item.code);
     const matchInfo = matches ? matches.get(item.code) : null;
+    const codeWithDot = item.code;
+    const codeNoDot = item.code.replace(/\./g, "");
+    const hasDot = codeWithDot !== codeNoDot;
     return `
       <div class="code-card">
         <div class="code-main">
@@ -302,9 +305,17 @@
           <button class="icon-btn ${isFav ? 'favorited' : ''}" data-fav="${escapeAttr(item.code)}" title="${isFav ? '移除最愛' : '加入最愛'}" aria-label="${isFav ? '移除最愛' : '加入最愛'}">
             <svg class="star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
           </button>
-          <button class="icon-btn" data-copy="${escapeAttr(item.code)}" title="複製代碼" aria-label="複製代碼">
-            <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-          </button>
+          <div class="copy-group">
+            <button class="copy-pill" data-copy="${escapeAttr(codeWithDot)}" title="複製：${escapeAttr(codeWithDot)}（含小數點）" aria-label="複製代碼 ${escapeAttr(codeWithDot)} 含小數點">
+              <svg class="copy-pill-icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>${escapeHtml(codeWithDot)}</span>
+            </button>
+            ${hasDot ? `
+            <button class="copy-pill copy-pill-alt" data-copy="${escapeAttr(codeNoDot)}" title="複製：${escapeAttr(codeNoDot)}（無小數點）" aria-label="複製代碼 ${escapeAttr(codeNoDot)} 無小數點">
+              <svg class="copy-pill-icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>${escapeHtml(codeNoDot)}</span>
+            </button>` : ''}
+          </div>
         </div>
       </div>
     `;

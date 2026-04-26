@@ -332,8 +332,9 @@ body {
 
 .actions {
   display: flex;
-  gap: 2px;
+  gap: 4px;
   flex-shrink: 0;
+  align-items: flex-start;
 }
 
 .icon-btn {
@@ -378,6 +379,64 @@ body {
 
 .icon-btn.favorited svg.star {
   fill: currentColor;
+}
+
+/* === 複製按鈕（兩種模式：含小數點 / 無小數點） === */
+.copy-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.copy-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.12s;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.copy-pill:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.copy-pill:active {
+  transform: scale(0.97);
+}
+
+.copy-pill-alt {
+  color: var(--color-text-secondary);
+  background: transparent;
+}
+
+.copy-pill-alt:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.copy-pill-icon {
+  width: 12px;
+  height: 12px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.7;
+  flex-shrink: 0;
 }
 
 /* ============================================
